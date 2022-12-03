@@ -1,0 +1,31 @@
+- Sınıflar klasörü oluşturup içine kişiler ve departmanlar sınıflarını tanımladık.
+public class Kisiler
+    {
+        [Key]
+        public int KisiID { get; set; }
+        [Column(TypeName = "varchar")]
+        [StringLength(15)]
+        public string KisiAd { get; set; }
+        
+        [Column(TypeName ="varchar")]
+        [StringLength(20)]
+        public string KisiSoyad { get; set; }
+
+        [Column(TypeName = "varchar")]
+        [StringLength(50)]
+        public string Mail { get; set; }
+    }
+
+- Entity Framework'ü projeye ekledik. Daha sonra Context sınıfını klasöre ekleyerek prop.ları tanımladık.
+public class Context:DbContext
+    {
+        public DbSet<Kisiler> Kisiler { get; set; }
+        public DbSet<Departman> Departman { get; set; }
+    }
+
+- Web.Config'e connectionStrings ekle ve pm console'a enable-migrations yazdık. AutomaticMigrationsEnabled'ı true yaptık ve 
+pm console'a update-database yazarak veri tabanını oluşturduk.
+
+- Web form oluşturduk ve Bootstrap'ten tablo ekledik. Tabloya repeater ile veritabanındaki verileri çektik.
+
+- Veritabanına veri girişi yaptık ve web formun classında model yerine context sınıfına ait değişken üreterek verileri tabloya listeledik.
